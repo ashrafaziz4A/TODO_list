@@ -21,14 +21,13 @@ new Vue({
 			});
 			vm.load = true;
 		},
-		update_data(list) {
+		stockIn() {
 			var vm = this;
 			vm.load = false;
-			var url = base_url+'api/update';
+			var url = base_url+'api/stockIn';
 			const options = {
 				method: 'POST',
 				headers: { 'content-type': 'application/form-data' },
-				data: {'list' : list},
 				url: url,
 			};
 			axios(options)
@@ -40,35 +39,35 @@ new Vue({
 				alert(error);
 			});
 		},
-		delete_data(id) {
+		stockOut() {
 			var vm = this;
 			vm.load = false;
-			if (id != ''){
-				var url = base_url+'api/delete';
-				console.log(url);
-				const options = {
-					method: 'POST',
-					headers: { 'content-type': 'application/form-data' },
-					data: {'id' : id},
-					url: url,
-				};
-				axios(options)
-				.then(function(response) {
-					console.log(response.data);
-					vm.getData();
-				})
-				.catch(function(error) {
-					alert(error);
-				});
-			}else{
+			var url = base_url+'api/stockOut';
+			const options = {
+				method: 'POST',
+				headers: { 'content-type': 'application/form-data' },
+				url: url,
+			};
+			axios(options)
+			.then(function(response) {
+				console.log(response.data);
 				vm.getData();
-			}
+			})
+			.catch(function(error) {
+				alert(error);
+			});
 		},
-		add_row() {
+		resetAll() {
 			var vm = this;
-			var arr = {'id' : '' ,'text' : '','title' : ''};
-			vm.all_list.push(arr);
-			console.log(vm.all_list);
+			var url = base_url+'api/resetAll';
+			axios.get(url)
+			.then(function(response) {
+				vm.getData();
+			})
+			.catch(function(error) {
+				alert(error);
+			});
+			vm.load = true;
 
 		}
 	  }
