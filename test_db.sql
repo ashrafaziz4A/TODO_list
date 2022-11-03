@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2022 at 03:47 PM
+-- Generation Time: Nov 03, 2022 at 09:53 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -29,18 +29,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `data_list` (
   `id` int(11) NOT NULL,
-  `title` varchar(40) NOT NULL,
-  `text` varchar(255) NOT NULL,
-  `updated_at` date NOT NULL
+  `count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `data_list`
 --
 
-INSERT INTO `data_list` (`id`, `title`, `text`, `updated_at`) VALUES
-(8, 'test title', 'test text2 2', '0000-00-00'),
-(11, 'test data 3', 'test data 3', '0000-00-00');
+INSERT INTO `data_list` (`id`, `count`) VALUES
+(1, 10),
+(2, 10),
+(3, 10),
+(4, 10),
+(5, 10);
 
 --
 -- Indexes for dumped tables

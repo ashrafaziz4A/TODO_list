@@ -14,15 +14,24 @@ class Api extends Controller {
 		$arr = array('data_set' => $data_set,'status' => 'success');
 		echo json_encode($arr,JSON_PRETTY_PRINT);
 	}
-	public function update() {
-		$single = $this->model->update_single(Post::get()['list']);
-		echo json_encode($single,JSON_PRETTY_PRINT);
-		// $arr = array('data_set' => $data_set,'status' => 'success');
-		//echo json_encode($arr,JSON_PRETTY_PRINT);
+	public function stockIn() {
+		$random = rand(1,5);
+		$single = $this->model->updateStock($random, 1);
+		$random = rand(1,5);
+		$single = $this->model->updateStock($random, 1);
+		$random = rand(1,5);
+		$single = $this->model->updateStock($random, 1);
 	}
-	public function delete() {
-		$single = $this->model->delete_single(Post::get()['id']);
-		echo json_encode($single,JSON_PRETTY_PRINT);
+	public function stockOut() {
+		$random = rand(1,5);
+		$single = $this->model->updateStock($random, -1);
+		$random = rand(1,5);
+		$single = $this->model->updateStock($random, -1);
+		$random = rand(1,5);
+		$single = $this->model->updateStock($random, -1);
+	}
+	public function resetAll() {
+		$this->model->resetAll();
 	}
 }
 

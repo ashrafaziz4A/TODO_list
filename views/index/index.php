@@ -1,34 +1,33 @@
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+	<h1 class="h3 mb-0 text-gray-800">Stock</h1>
+</div>
 <div class="container-fluid" id="app">
 	<div class="row" v-if='load'>
-		<div class="col-lg-12" >
-			<template v-for='list in all_list'>
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">
-							<input class="form-control form-control-user"  aria-describedby="emailHelp" placeholder="Title" v-model='list.title'>
-						</h6>
-					</div>
+		<template v-for='list in all_list'>
+			<div class="col-xl-3 col-md-6 mb-4">
+				<div class="card border-left-primary shadow h-100 py-2">
 					<div class="card-body">
-						<p></p>
-						<!-- Circle Buttons (Default) -->
-						<div class="mb-2">
-							<code><textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  v-model='list.text'></textarea></code>
-						</div>
-						<div href="#" class="btn btn-success btn-circle">
-							<i @click="update_data(list)" title="Save" class="fas fa-check"></i>
-						</div>
-						<div class="btn btn-danger btn-circle">
-							<i @click="delete_data(list.id)" title="Delete" class="fas fa-trash"></i>
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1" > ITEM {{list.id}}</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">UNIT {{list.count}}</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</template>
-			<div class="card" v-if='load'>
-			<div href="#" class="btn btn-primary btn-circle">
-				<i @click="add_row()" title="Delete" class="fas fa-plus"></i>
 			</div>
-			</div>
-		</div>
+		</template>
 	</div>
-	
+	<div href="#" class="btn btn-primary btn-circle">
+		<i @click="resetAll()" title="RESET" class="fas fa-backward "></i>
+	</div>
+	<div href="#" class="btn btn-success btn-circle">
+		<i @click="stockIn()" title="Stock In" class="fas fa-plus"></i>
+	</div>
+	<div href="#" class="btn btn-warning btn-circle">
+		<i @click="stockOut()" title="Stock Out" class="fas fa-minus"></i>
+	</div>
 </div>
+
+

@@ -13,46 +13,28 @@ class Api_Model extends Model
 		$data->execute();
 		return $data->fetchAll();
 	}
-	public function select_single($list)
-	{
+
+	public function updateStock($id , $operation){
 		$data = $this->db->prepare("SELECT * FROM ".$this->table." WHERE id = :id");
-		$data->execute(array(
-			':id' => $list['id']
-		));
-		return $data->fetch();
-	}
-	public function update_single($list)
-	{
-		$check = $this->select_single($list);
-		if ($check != null){
-			$data = $this->db->prepare("UPDATE ".$this->table." SET title = :title,text = :text WHERE id = :id");
-			$data->execute(array(
-				':id'    => $list['id'],
-				':title' => $list['title'],
-				':text'  => $list['text']
-			));
-			$data->fetch();
-			return 'updated';
-		}else{
-			$data = $this->db->prepare("INSERT INTO ".$this->table." (`title`,`text`) VALUES (:title,:text)");
-			$data->execute(array(
-				':title' => $list['title'],
-				':text'  => $list['text']
-			));
-			return 'created';
-		}
-	}
-	public function delete_single($id)
-	{
-		if ($id == ''){
-			return 'no data';
-		}
-		$data = $this->db->prepare("DELETE FROM ".$this->table." WHERE id = :id");
 		$data->execute(array(
 			':id' => $id
 		));
+		$item = $data->fetch();
+		$stock = $item['count'] + $operation;
+		$update = $this->db->prepare("UPDATE ".$this->table." SET count = :count WHERE id = :id");
+		$update->execute(array(
+			':id'    => $id,
+			':count' => $stock
+		));
+		$update->fetch();
+		return 'updated';
+	}
+	public function resetAll()
+	{
+		$data = $this->db->prepare("UPDATE `".$this->table."` SET `count` = '10'");
+		$data->execute();
 		$data->fetch();
-		return 'deleted';
+		return 'updated';
 	}
 
 
